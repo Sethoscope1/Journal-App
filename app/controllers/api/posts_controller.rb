@@ -24,6 +24,13 @@ class Api::PostsController < ApplicationController
     end
   end
 
+  def show
+    if @post = Post.find(params[:id])
+      render json: @post
+    else
+      head status: 404
+    end
+  end
 
 end
 

@@ -1,4 +1,11 @@
 JA.Views.PostIndex = Backbone.View.extend({
+  initialize: function () {
+    var that = this;
+    that.listenTo(that.collection, "remove", that.render);
+    that.listenTo(that.collection, "change:title", that.render);
+    that.listenTo(that.collection, "add", that.render);
+    that.listenTo(that.collection, "reset", that.render);
+  },
 
   render: function () {
     var $ul = $("<ul>", {});
@@ -10,20 +17,19 @@ JA.Views.PostIndex = Backbone.View.extend({
         '>Delete Me!</button></li>')
     });
     this.$el.append($ul);
+    var that = this;
     return this;
   },
 
   events: {
-    'click .delete-button': "collectionRemovePost"
+    'click .delete-button': "collectionRemovePost",
   },
 
   collectionRemovePost: function(event) {
-    console.log('click');
     var id = $(event.currentTarget).data("id");
     var post = this.collection.get(id);
     console.log(this.collection);
     this.collection.remove(post);
     post.destroy();
   }
-
 });

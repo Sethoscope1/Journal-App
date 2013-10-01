@@ -2,7 +2,7 @@ JournalApp::Application.routes.draw do
   root to: "static_pages#root"
 
   namespace "api", defaults: { format: :json } do
-    resources :posts, only: [:create, :index, :destroy]
+    resources :posts
   end
 
   # The priority is based upon order of creation:
