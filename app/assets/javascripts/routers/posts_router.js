@@ -3,20 +3,25 @@ JA.Routers.PostsRouter = Backbone.Router.extend ({
   routes: {
     "":                      "postsIndex",
     "posts/new":             "postForm",
+    "posts/edit/:id":        "postForm",
     "posts/:id":             "postShow"
+
 
   },
 
-  initialize: function($rootEl) {
-    this.$rootEl = $rootEl;
+  initialize: function($content, $sidebar) {
+    this.$content = $content;
+    this.$sidebar = $sidebar;
     this.collection = new JA.Collections.Posts();
     this.collection.fetch();
+    this.postsIndex();
   },
 
   postsIndex: function() {
 
     var that = this;
-    that.$rootEl.empty();
+    that.$sidebar.empty();
+    that.$content.empty();
 
     console.log("You moved, man");
 
@@ -24,13 +29,13 @@ JA.Routers.PostsRouter = Backbone.Router.extend ({
       collection: that.collection
     });
 
-    that.$rootEl.append(postIndex.render().$el);
+    that.$sidebar.append(postIndex.render().$el);
   },
 
   postShow: function(id) {
 
     var that = this;
-    that.$rootEl.empty();
+    that.$content.empty();
 
     var post = that.collection.get(id);
 
@@ -38,16 +43,18 @@ JA.Routers.PostsRouter = Backbone.Router.extend ({
       model: post
     });
 
-    that.$rootEl.append(postShow.render().$el);
+    that.$content.append(postShow.render().$el);
   },
 
   postForm: function (id) {
     var that = this;
-    this.$rootEl.empty();
+    this.$content.empty();
 
     if (typeof id !== 'undefined') {
       //edit
-      var post = this.collection.get(id);
+      var post = new Post;
+      console.log(that.collection);
+      console.log(post);
     }
 
     var postForm = new JA.Views.PostForm({
@@ -55,7 +62,7 @@ JA.Routers.PostsRouter = Backbone.Router.extend ({
       collection: that.collection
     });
 
-    this.$rootEl.append(postForm.render().$el);
+    this.$content.append(postForm.render().$el);
   }
 
 });

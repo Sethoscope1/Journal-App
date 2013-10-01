@@ -9,17 +9,17 @@
 <body>
 
   <div id="content">
-
+    <h1>I am the content</h1>
   </div>
 
   <div id="sidebar">
-
+    <h1>I am the sidebar</h1>
   </div>
 
   <%= yield %>
 
   <script>
-    JA.initialize($("body"));
+    JA.initialize($("#content"), $("#sidebar"));
   </script>
 </body>
 </html>

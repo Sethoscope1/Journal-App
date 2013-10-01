@@ -4,8 +4,8 @@ window.JA = {
   Views: {},
   Routers: {},
 
-  initialize: function ($rootEl) {
-    new JA.Routers.PostsRouter($rootEl);
+  initialize: function ($content, $sidebar) {
+    new JA.Routers.PostsRouter($content, $sidebar);
     Backbone.history.start();
   }
 };
