@@ -1,0 +1,10 @@
+<h1>Index</h1>
+<ul>
+  <% posts.forEach( function(post){ %>
+    <li><%= post.get('title') %>
+      <button class="delete-button" data-id=<%= post.get('id') %>>
+        Delete Me!
+      </button>
+    </li>
+  <% }); %>
+</ul>

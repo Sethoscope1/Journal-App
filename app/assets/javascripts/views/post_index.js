@@ -8,18 +8,16 @@ JA.Views.PostIndex = Backbone.View.extend({
   },
 
   render: function () {
-    var $ul = $("<ul>", {});
-    this.$el.empty();
-    this.collection.models.forEach(function(post) {
-      $ul.append('<li>' + post.get("title") +
-        '<button class="delete-button" data-id=' +
-        post.get("id") +
-        '>Delete Me!</button></li>')
-    });
-    this.$el.append($ul);
     var that = this;
+    this.$el.empty();
+    this.$el.append(JST["post_index"]({
+      posts: that.collection.models
+    }));
     return this;
   },
+
+
+  //  dat.$el.append(JST["photo_detail"]({
 
   events: {
     'click .delete-button': "collectionRemovePost",
